@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Victoria Secret Coding exercise</title>
+    <style>
+      .outer-container {
+        display: flex;
+        background-color: #bfbfbf;
+        height: 400px;
+        width: 500px;
+      }
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        width: 302px;
+        height: 302px;
+        border: 1px solid transparent;
+        box-sizing: border-box;
+        box-shadow: 2px 2px 2px 1px #999;
+      }
+
+      .box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100px;
+        height: 100px;
+        /* border: 1px solid black; */
+        box-sizing: border-box;
+        font-size: 36px;
+        color: white;
+      }
+      .button-container {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 30%;
+        flex-shrink: 1;
+        flex-grow: 0;
+      }
+
+      button {
+        padding: 10px 25px;
+        color: white;
+        font-weight: 400;
+        background-color: #72c3dc;
+        border: 0px;
+        box-shadow: 1px 5px 2px #6f98a8;
+        width: 130px;
+        margin-top: 20px;
+        margin-left: 20px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="outer-container">
+      <div class="container">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+      </div>
+      <div class="button-container">
+        <button id="shuffleBtn">Shuffle</button>
+        <button id="sortBtn">Sort</button>
+      </div>
+    </div>
+    <script>
+      let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+      let colorScheme = {
+        1: "#6F98A8",
+        2: "#2B8EAD",
+        3: "#2F454E",
+        4: "#2B8EAD",
+        5: "#2F454E",
+        6: "#BFBFBF",
+        7: "#BFBFBF",
+        8: "#6F98A8",
+        9: "#2F454E",
+      };
+
+      function displayUpdatedBoxes() {
+        // display the numbers in the boxes
+        let boxes = document.querySelectorAll(".box");
+        for (let i = 0; i < boxes.length; i++) {
+          boxes[i].innerText = numbers[i];
+          boxes[i].style.backgroundColor = colorScheme[numbers[i]];
+        }
+      }
+
+      // shuffle the numbers in the array
+      function shuffle() {
+        for (let i = numbers.length - 1; i > 0; i--) {
+          let j = Math.floor(Math.random() * (i + 1));
+          [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+        }
+
+        displayUpdatedBoxes();
+      }
+
+      // sort the numbers in the array in ascending order
+      function sortAscending() {
+        numbers.sort(function (a, b) {
+          return a - b;
+        });
+
+        displayUpdatedBoxes();
+      }
+
+      // display the initial numbers in the boxes
+      displayUpdatedBoxes();
+      // add click event listeners to the buttons
+      let shuffleBtn = document.getElementById("shuffleBtn");
+      shuffleBtn.addEventListener("click", shuffle);
+
+      let sortBtn = document.getElementById("sortBtn");
+      sortBtn.addEventListener("click", sortAscending);
+    </script>
+  </body>
+</html>
